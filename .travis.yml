@@ -1,7 +1,7 @@
 language: java
 branches:
   only:
-    - milestone-1-deploy-java
+    - master
 
 # notifications:
 #   email:
@@ -17,9 +17,9 @@ script: cd "SG_MICROSERVICE_STORMDETECTOR" && mvn clean install -DskipTests=true
 
 before_deploy:
   - cd ..
-  - zip -r SGA_NPComplete_Java.zip SG_MICROSERVICE_STORMDETECTOR SG_MICROSERVICE_DATAINGESTOR SG_MICROSERVICE_STROMCLUSTERING SG_MICROSERVICE_REGISTRY scripts appspec.yml || true
+  - zip -r SG_MICROSERVICE_STORMDETECTOR.zip SG_MICROSERVICE_STORMDETECTOR scripts appspec.yml || true
   - mkdir -p "dpl_java_upload"
-  - mv SGA_NPComplete_Java.zip dpl_java_upload/SGA_NPComplete_Java.zip || true
+  - mv SG_MICROSERVICE_STORMDETECTOR.zip dpl_java_upload/SG_MICROSERVICE_STORMDETECTOR.zip || true
 
 deploy:
   - provider: s3
@@ -32,16 +32,16 @@ deploy:
     acl: public_read
     detect_encoding: true
     on:
-      branch: milestone-1-deploy-java
+      branch: master
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
     secret_access_key: $AWS_SECRET_KEY
     bucket: sga-teamnpcomplete
-    key: SGA_NPComplete_Java.zip
+    key: SG_MICROSERVICE_STORMDETECTOR.zip
     bundle_type: zip
     application: TeamNPComplete
     deployment_group: TeamNPComplete
     region: us-west-2
     on:
-      branch: milestone-1-deploy-java
+      branch: master
