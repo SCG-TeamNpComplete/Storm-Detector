@@ -27,6 +27,8 @@ public class DataIngester {
 		DIservice = new DataIngesterService();
 		return DIservice.returnBuiltURL(dataingesterparam.getDate(), dataingesterparam.getTime(),
 				dataingesterparam.getNEXRADstation());
+		
+		
 	}
 	
 	/*@GET
