@@ -83,7 +83,7 @@ public class StromDetection {
 		// System.out.println("Client client1 ");
 
 		WebTarget target1 = client1
-				.target("http://localhost:8080/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClustering").path("send");
+				.target("http://localhost:8888/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClustering").path("send");
 		System.out.println("WebTarget in detector");
 		// target1.queryParam("name1", "value1");
 
