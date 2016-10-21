@@ -26,8 +26,8 @@ import com.milestone1.Service.StormDetectionService;
 public class StromDetection {
 	private StormDetectionService stormDetectionService;
 	
-
-	public String KML = new String("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
+	//public String KMLhead="<?xml version="+"1.0"+"encoding="+"UTF-8"+"?>";
+	public String KML = new String("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
 					+ "  <Placemark>\n" + "    <name>Simple placemark</name>\n"
 					+ "    <description>Attached to the ground. Intelligently places itself \n"
 					+ "       at the height of the underlying terrain.</description>\n" + "    <Point>\n"
@@ -51,11 +51,13 @@ public class StromDetection {
 		//String result = "@Produces(\"application/xml\")" + "\n\n" + "Output:\n\n Example KML, we can add tags here "
 		//		+ "\n\n" + "\n\n URL for file is " + newUrl + "\n\n" + " use this for download \n\n";
 		
+		String url=newUrl;
 		String result="Generated in StormDetection.java";
+		String dummy="";
 		
 		
-		return "<KMLResponseFromStormDetector>" + "<newUrl>" + newUrl + "</newUrl>" + "<dummyKml>" + KML + "</dummyKml>"
-				+ "<filename>" + result + "</filename>" + "</KMLResponseFromStormDetector>";
+		return "<KMLResponseFromStormDetector>" + "<tags>"+ dummy +"</tags>"+ "<newUrl>" + url + "</newUrl>" + "<dummyKml>" + KML + "</dummyKml>"
+				+ "<filename>" + result + "</filename>" +"</KMLResponseFromStormDetector>";
 	}
 
 	@POST
