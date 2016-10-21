@@ -25,9 +25,9 @@ import com.milestone1.Service.StormDetectionService;
 @Path("/StormDetection")
 public class StromDetection {
 	private StormDetectionService stormDetectionService;
-	JsonCreation json = new JsonCreation();
-
-	public String KML = new String("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
+	
+	
+	public String KML = new String("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
 					+ "  <Placemark>\n" + "    <name>Simple placemark</name>\n"
 					+ "    <description>Attached to the ground. Intelligently places itself \n"
 					+ "       at the height of the underlying terrain.</description>\n" + "    <Point>\n"
@@ -35,7 +35,6 @@ public class StromDetection {
 					+ "  </Placemark>\n" + "</kml>");
 
 	@GET
-	// @POST
 	@Path("/get")
 	@Produces("application/xml")
 	public String generateKML(String newUrl) throws ParseException {
@@ -51,20 +50,27 @@ public class StromDetection {
 		//String result = "@Produces(\"application/xml\")" + "\n\n" + "Output:\n\n Example KML, we can add tags here "
 		//		+ "\n\n" + "\n\n URL for file is " + newUrl + "\n\n" + " use this for download \n\n";
 		
+		String url=newUrl;
 		String result="Generated in StormDetection.java";
+		String dummy="";
 		
 		
-		return "<KMLResponseFromStormDetector>" + "<newUrl>" + newUrl + "</newUrl>" + "<dummyKml>" + KML + "</dummyKml>"
-				+ "<filename>" + result + "</filename>" + "</KMLResponseFromStormDetector>";
+		return "<KMLResponseFromStormDetector>" + "<tags>"+ dummy +"</tags>"+ "<newUrl>" + url + "</newUrl>" + "<dummyKml>" + KML + "</dummyKml>"
+				+ "<filename>" + result + "</filename>" +"</KMLResponseFromStormDetector>";
 	}
 
 	@POST
 	@Path("/send")
 	@Consumes("application/xml")
 	public Response json(String url) throws ParseException, JSONException {
+		
+		System.out.println("in send method of detector - successfully posted to detector");
+		JsonCreation json = new JsonCreation();
+		System.out.println("Done sending to DB");
 		StromDetection sd = new StromDetection();
 		String newUrl = url;
-		System.out.println("data in detector  " + newUrl);
+		System.out.println();
+		System.out.println("data in detector " + newUrl);
 		String KML = sd.generateKML(newUrl);
 		sd.sendURL(KML);
 		return Response.status(200).entity(newUrl).build();
@@ -84,6 +90,7 @@ public class StromDetection {
 		// Response response = target1.request().post(Entity.entity(url,
 		// "application/xml"), Response.class);
 		String responsefrom;
+		System.out.println("posting to StormClustering");
 		responsefrom = target1.request().post(Entity.entity(url, "application/xml"), String.class);
 		// System.out.println(response.toString());
 		System.out.println();
