@@ -25,7 +25,7 @@ import com.milestone1.Service.StormDetectionService;
 @Path("/StormDetection")
 public class StromDetection {
 	private StormDetectionService stormDetectionService;
-	JsonCreation json = new JsonCreation();
+	
 
 	public String KML = new String("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
 					+ "  <Placemark>\n" + "    <name>Simple placemark</name>\n"
@@ -62,9 +62,14 @@ public class StromDetection {
 	@Path("/send")
 	@Consumes("application/xml")
 	public Response json(String url) throws ParseException, JSONException {
+		
+		System.out.println("in send method of detector - successfully posted to detector");
+		JsonCreation json = new JsonCreation();
+		System.out.println("Done sending to DB");
 		StromDetection sd = new StromDetection();
 		String newUrl = url;
-		System.out.println("data in detector  " + newUrl);
+		System.out.println();
+		System.out.println("data in detector " + newUrl);
 		String KML = sd.generateKML(newUrl);
 		sd.sendURL(KML);
 		return Response.status(200).entity(newUrl).build();
@@ -84,6 +89,7 @@ public class StromDetection {
 		// Response response = target1.request().post(Entity.entity(url,
 		// "application/xml"), Response.class);
 		String responsefrom;
+		System.out.println("posting to StormClustering");
 		responsefrom = target1.request().post(Entity.entity(url, "application/xml"), String.class);
 		// System.out.println(response.toString());
 		System.out.println();
