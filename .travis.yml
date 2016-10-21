@@ -1,23 +1,28 @@
 language: java
 branches:
   only:
-    - master
+    - milestone-2
 
-# notifications:
-#   email:
-#     - asampath@umail.iu.edu
-#     - soachar@umail.iu.edu
-#     - kgundlup@umail.iu.edu
-#     - pbheemag@umail.iu.edu
 jdk:
   - oraclejdk8
-sudo: false
-install: true
-script: cd "SG_MICROSERVICE_STORMDETECTOR" && mvn clean install -DskipTests=true
+sudo: required
+
+services:
+  - docker
+
+
+install:
+  - cd "SG_MICROSERVICE_STORMDETECTOR" && mvn -e clean install
+  - docker build -t kedargn/stormdetector ../.
+  - docker ps -a
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push kedargn/stormdetector
+
+script: mvn clean install -DskipTests=true
 
 before_deploy:
   - cd ..
-  - zip -r SG_MICROSERVICE_STORMDETECTOR.zip SG_MICROSERVICE_STORMDETECTOR scripts appspec.yml || true
+  - zip -r SG_MICROSERVICE_STORMDETECTOR.zip scripts appspec.yml || true
   - mkdir -p "dpl_java_upload"
   - mv SG_MICROSERVICE_STORMDETECTOR.zip dpl_java_upload/SG_MICROSERVICE_STORMDETECTOR.zip || true
 
@@ -32,7 +37,7 @@ deploy:
     acl: public_read
     detect_encoding: true
     on:
-      branch: master
+      branch: milestone-2
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
@@ -44,4 +49,4 @@ deploy:
     deployment_group: TeamNPComplete
     region: us-west-2
     on:
-      branch: master
+      branch: milestone-2
