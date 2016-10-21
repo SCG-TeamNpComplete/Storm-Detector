@@ -26,7 +26,7 @@ import com.milestone1.Service.StormDetectionService;
 public class StromDetection {
 	private StormDetectionService stormDetectionService;
 	
-	//public String KMLhead="<?xml version="+"1.0"+"encoding="+"UTF-8"+"?>";
+	
 	public String KML = new String("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
 					+ "  <Placemark>\n" + "    <name>Simple placemark</name>\n"
 					+ "    <description>Attached to the ground. Intelligently places itself \n"
@@ -35,7 +35,6 @@ public class StromDetection {
 					+ "  </Placemark>\n" + "</kml>");
 
 	@GET
-	// @POST
 	@Path("/get")
 	@Produces("application/xml")
 	public String generateKML(String newUrl) throws ParseException {
