@@ -1,8 +1,6 @@
 package com.milestone1.Dao;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -13,17 +11,18 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
 import org.glassfish.jersey.client.ClientConfig;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.milestone1.Service.StormDetectionService;
 
 @Path("/StormDetection")
 public class StromDetection {
+	
+	private static Logger log=Logger.getLogger(StromDetection.class);
 	private StormDetectionService stormDetectionService;
 	
 	
@@ -64,8 +63,16 @@ public class StromDetection {
 	@Consumes("application/xml")
 	public Response json(String url) throws ParseException, JSONException {
 		
+		log.info("contacted post method of storm detector");
+		
 		System.out.println("in send method of detector - successfully posted to detector");
+		
+		log.info("contacted JsonCreation");
+		
 		JsonCreation json = new JsonCreation();
+		
+		
+		
 		System.out.println("Done sending to DB");
 		StromDetection sd = new StromDetection();
 		String newUrl = url;
@@ -73,6 +80,9 @@ public class StromDetection {
 		System.out.println("data in detector " + newUrl);
 		String KML = sd.generateKML(newUrl);
 		sd.sendURL(KML);
+		
+		log.info("called sendURL() of storm detector");
+		
 		return Response.status(200).entity(newUrl).build();
 	}
 
@@ -92,6 +102,8 @@ public class StromDetection {
 		String responsefrom;
 		System.out.println("posting to StormClustering");
 		responsefrom = target1.request().post(Entity.entity(url, "application/xml"), String.class);
+		
+		log.info("notified storm clustering");
 		// System.out.println(response.toString());
 		System.out.println();
 		System.out.println(responsefrom);
