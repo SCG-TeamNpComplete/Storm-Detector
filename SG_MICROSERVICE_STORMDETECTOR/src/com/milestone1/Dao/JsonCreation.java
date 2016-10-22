@@ -57,7 +57,7 @@ public class JsonCreation {
 		// WebTarget target1 =
 		// client1.target("http://ec2-54-69-92-137.us-west-2.compute.amazonaws.com:65000/forecast_decision").path("json");
 		WebTarget target1 = client1
-				.target("http://ec2-35-160-231-198.us-west-2.compute.amazonaws.com:8080/SG_MICROSERVICE_REGISTRY/gateway")
+				.target("http://ec2-35-161-48-143.us-west-2.compute.amazonaws.com:8080/SG_MICROSERVICE_REGISTRY/gateway")
 				.path("message").path("saveData");
 		// WebTarget target1 =
 		// client1.target("http://localhost:8080/SG_MICROSERVICE_STORMDETECTOR").path("gateway").path("StormDetection").path("sendjson");
