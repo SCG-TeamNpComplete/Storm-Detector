@@ -38,13 +38,6 @@ public class StromDetection {
 	@Produces("application/xml")
 	public String generateKML(String newUrl) throws ParseException {
 		StromDetection sd = new StromDetection();
-		try {
-			//Thread.sleep(0);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		sd.sendURL(newUrl);
 
 		// Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
