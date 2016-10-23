@@ -39,7 +39,7 @@ public class StromDetection {
 	public String generateKML(String newUrl) throws ParseException {
 		StromDetection sd = new StromDetection();
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(60000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
