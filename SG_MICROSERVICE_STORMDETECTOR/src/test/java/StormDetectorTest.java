@@ -1,4 +1,4 @@
-package test.java;
+/*package test.java;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -46,3 +46,4 @@ public class StormDetectorTest {
 
 	}
 }
+*/
