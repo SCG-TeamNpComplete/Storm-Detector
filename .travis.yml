@@ -1,7 +1,7 @@
 language: java
 branches:
   only:
-    - milestone-2
+    - milestone-3
 
 jdk:
   - oraclejdk8
@@ -37,7 +37,7 @@ deploy:
     acl: public_read
     detect_encoding: true
     on:
-      branch: milestone-2
+      branch: milestone-3
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
@@ -49,4 +49,16 @@ deploy:
     deployment_group: TeamNPComplete
     region: us-west-2
     on:
-      branch: milestone-2
+      branch: milestone-3
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY_TEST # declared in Travis repo settings
+    secret_access_key: $AWS_SECRET_KEY_TEST
+    bucket: sga-teamnpcomplete
+    key: SG_MICROSERVICE_STORMDETECTOR.zip
+    bundle_type: zip
+    application: TeamNPCompleteTest
+    deployment_group: TeamNPCompleteTest
+    region: us-west-2
+    on:
+      branch: milestone-3

@@ -1,4 +1,14 @@
+#!/bin/bash
+
 sudo yum install -y docker-io
 sudo service docker start
-sudo docker ps -a | grep 'stormdetector' | awk '{print $1}' | xargs --no-run-if-empty docker stop
-sudo docker ps -a | grep 'stormdetector' | awk '{print $1}' | xargs --no-run-if-empty docker rm
+
+dangling_images="$(sudo docker images -f "dangling=true" -q)"
+
+
+if [ "$dangling_images" == "" ] ; then
+        echo "no images"
+else
+		sudo docker rmi -f $(sudo docker images -f "dangling=true" -q)
+    echo "images present"
+fi
