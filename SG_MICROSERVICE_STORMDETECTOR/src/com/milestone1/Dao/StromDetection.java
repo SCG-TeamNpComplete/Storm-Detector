@@ -45,7 +45,7 @@ public class StromDetection {
 			e.printStackTrace();
 		}
 
-		sd.sendURL(newUrl);
+		//sd.sendURL(newUrl);
 
 		// Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
 
