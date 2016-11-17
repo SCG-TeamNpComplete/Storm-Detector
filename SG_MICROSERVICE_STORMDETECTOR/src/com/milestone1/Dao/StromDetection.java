@@ -1,5 +1,7 @@
 package com.milestone1.Dao;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 
 import javax.ws.rs.Consumes;
@@ -13,6 +15,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
 import org.glassfish.jersey.client.ClientConfig;
 import org.json.JSONException;
@@ -21,6 +25,7 @@ import com.milestone1.Service.StormDetectionService;
 
 @Path("/StormDetection")
 public class StromDetection {
+	//StromDetection sd=new StromDetection();
 	
 	private static Logger log=Logger.getLogger(StromDetection.class);
 	private StormDetectionService stormDetectionService;
@@ -36,7 +41,7 @@ public class StromDetection {
 	@GET
 	@Path("/get")
 	@Produces("application/xml")
-	public String generateKML(String newUrl) throws ParseException {
+	public String generateKML(String newUrl) throws ParseException, URISyntaxException {
 		StromDetection sd = new StromDetection();
 		try {
 			Thread.sleep(1);
@@ -45,7 +50,7 @@ public class StromDetection {
 			e.printStackTrace();
 		}
 
-		//sd.sendURL(newUrl);
+		sd.sendURL(newUrl);
 
 		// Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
 
@@ -67,7 +72,7 @@ public class StromDetection {
 	@POST
 	@Path("/send")
 	@Consumes("application/xml")
-	public Response json(String url) throws ParseException, JSONException {
+	public Response json(String url) throws ParseException, JSONException, URISyntaxException {
 		
 		log.info("contacted post method of storm detector");
 		
@@ -92,28 +97,50 @@ public class StromDetection {
 		return Response.status(200).entity(newUrl).build();
 	}
 
-	public String sendURL(String url) {
-		ClientConfig config1 = new ClientConfig();
+	public String sendURL(String url) throws URISyntaxException {
+		
+		
+		URIBuilder builder = new URIBuilder();
+		builder.setScheme("http").setHost("10.0.0.117:8080")
+				.setPath("SG_MICROSERVICE_STORMCLUSTERING/gateway/StormClusteringManager/delegate");
+		URI uri = builder.build();
+		HttpGet httpget = new HttpGet(uri);
+		ClientConfig clientConfig = new ClientConfig();
+		Client client = ClientBuilder.newClient(clientConfig);
+		String response =client.target(uri).request().get(String.class);
+		System.out.println(response);
+		
+		/*ClientConfig config1 = new ClientConfig();
 		// System.out.println("ClientConfig config1 ");
 		Client client1 = ClientBuilder.newClient(config1);
 		// System.out.println("Client client1 ");
-
-		WebTarget target1 = client1
-				.target("http://ec2-35-160-137-157.us-west-2.compute.amazonaws.com:8888/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClustering").path("send");
-		System.out.println("WebTarget in detector");
+		
+		
+		
+		
+		//WebTarget target1 = client1
+		//		.target("http://ec2-35-160-137-157.us-west-2.compute.amazonaws.com:8888/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClustering").path("send");
+		//System.out.println("WebTarget in detector");
 		// target1.queryParam("name1", "value1");
+		
+		
+		
+		WebTarget target2 = client1
+				.target("http://localhost:8888/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClustering").path("send");
+		System.out.println("WebTarget in detector");
+		
 
 		// Response response = target1.request().post(Entity.entity(url,
 		// "application/xml"), Response.class);
 		String responsefrom;
 		System.out.println("posting to StormClustering");
-		responsefrom = target1.request().post(Entity.entity(url, "application/xml"), String.class);
+		responsefrom = target2.request().post(Entity.entity(url, "application/xml"), String.class);
 		
 		log.info("notified storm clustering");
 		// System.out.println(response.toString());
 		System.out.println();
 		System.out.println(responsefrom);
-		return url;
+*/		return url;
 
 	}
 

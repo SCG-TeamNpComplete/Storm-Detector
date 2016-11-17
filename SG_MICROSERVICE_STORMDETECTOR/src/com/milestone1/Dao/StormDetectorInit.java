@@ -22,7 +22,7 @@ public class StormDetectorInit {
 	public String initZookeeper() throws IOException{
 		
 		//ZookeeperServiceRegistry registry=new ZookeeperServiceRegistry();
-		String endpointURI = "localhost:8080/SG_MICROSERVICE_STORMDETECTOR/gateway/StormDetection/get";
+		String endpointURI = "/SG_MICROSERVICE_STORMDETECTOR/gateway/StormDetection/get";
 	    //private final String endpointURI = "http://" + serverName + ":" + serverPort + "/catalog/resources/catalog";
 	    //private final String endpointURI = "http://" + WildFlyUtil.getHostName() + ":" + WildFlyUtil.getHostPort() + "/catalog/resources/catalog";
 	    String serviceName = "stormDetection";
