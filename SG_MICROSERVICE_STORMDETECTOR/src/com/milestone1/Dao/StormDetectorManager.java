@@ -76,18 +76,21 @@ public class StormDetectorManager {
 			String address = instances.get(thisIndex % instances.size()).getId();
 			UriSpec address1 = instances.get(thisIndex % instances.size()).getUriSpec();
 			String url=address1.build();
+			
+			System.out.println("response from storm detector manager");
 			System.out.println(url);
 			
 			
-			URIBuilder builder = new URIBuilder();
-			builder.setScheme("http").setHost("localhost:8080").setPath(url);
-			URI uri = builder.build();
+			//URIBuilder builder = new URIBuilder();
+			//builder.setScheme("http").setHost("localhost:8080").setPath(url);
+			//URI uri = builder.build();
 			//HttpGet httpget = new HttpGet(uri);
 			
 			
 			ClientConfig clientConfig = new ClientConfig();
 			Client client = ClientBuilder.newClient(clientConfig);
-			String response =client.target(uri).request().get(String.class);
+			String response =client.target(url).request().get(String.class);
+			System.out.println("response from storm clustering");
 			System.out.println(response);
 			
 			

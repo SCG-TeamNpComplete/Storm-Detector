@@ -42,6 +42,7 @@ public class StromDetection {
 	@Path("/get")
 	@Produces("application/xml")
 	public String generateKML(String newUrl) throws ParseException, URISyntaxException {
+		System.out.println("in SD /get");
 		StromDetection sd = new StromDetection();
 		try {
 			Thread.sleep(1);
@@ -101,14 +102,14 @@ public class StromDetection {
 		
 		
 		URIBuilder builder = new URIBuilder();
-		builder.setScheme("http").setHost("10.0.0.117:8080")
-				.setPath("SG_MICROSERVICE_STORMCLUSTERING/gateway/StormClusteringManager/delegate");
+		builder.setScheme("http").setHost("localhost:8080")
+				.setPath("/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClusteringManager/delegate");
 		URI uri = builder.build();
 		HttpGet httpget = new HttpGet(uri);
 		ClientConfig clientConfig = new ClientConfig();
 		Client client = ClientBuilder.newClient(clientConfig);
 		String response =client.target(uri).request().get(String.class);
-		System.out.println(response);
+		System.out.println("response from storm clusterin"+response);
 		
 		/*ClientConfig config1 = new ClientConfig();
 		// System.out.println("ClientConfig config1 ");
