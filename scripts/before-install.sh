@@ -23,8 +23,13 @@ if [ ! -d "$dir" ] ; then
 	cd "$dir/conf"
 	touch zoo.cfg
 	echo "tickTime=2000" > zoo.cfg
+	echo "initLimit=10" >> zoo.cfg
+	echo "syncLimit=5" >> zoo.cfg
 	echo "dataDir=/var/lib/zookeeper" >> zoo.cfg
 	echo "clientPort=2181" >> zoo.cfg
+	echo "server.1=ec2-35-161-48-143.us-west-2.compute.amazonaws.com:2888:3888" >> zoo.cfg
+	echo "server.2=ec2-35-160-137-157.us-west-2.compute.amazonaws.com:2888:3888" >> zoo.cfg
+	echo "server.3=ec2-52-15-90-97.us-east-2.compute.amazonaws.com:2888:3888" >> zoo.cfg
 fi
 
 cd "$dir/bin"
