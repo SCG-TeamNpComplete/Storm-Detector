@@ -20,8 +20,10 @@ install:
 
 script: mvn clean install -DskipTests=true
 
-before_deploy:
+after_success:
   - cd ..
+
+before_deploy:
   - zip -r SG_MICROSERVICE_STORMDETECTOR.zip scripts appspec.yml || true
   - mkdir -p "dpl_java_upload"
   - mv SG_MICROSERVICE_STORMDETECTOR.zip dpl_java_upload/SG_MICROSERVICE_STORMDETECTOR.zip || true
@@ -60,5 +62,29 @@ deploy:
     application: TeamNPCompleteTest
     deployment_group: TeamNPCompleteTest
     region: us-west-2
+    on:
+      branch: milestone-3
+
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings.
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: sga-npcomplete-east
+    local_dir: dpl_java_upload
+    region: us-east-2
+    skip_cleanup: true
+    acl: public_read
+    detect_encoding: true
+    on:
+      branch: milestone-3
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: sga-npcomplete-east
+    key: SG_MICROSERVICE_STORMDETECTOR.zip
+    bundle_type: zip
+    application: TeamNpComplete3
+    deployment_group: TeamNpComplete3
+    region: us-east-2
     on:
       branch: milestone-3
