@@ -57,6 +57,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
             <artifactId>jersey-media-moxy</artifactId>
         </dependency>
         <dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+        <dependency>
     		<groupId>org.json</groupId>
     		<artifactId>json</artifactId>
     		<version>20090211</version>

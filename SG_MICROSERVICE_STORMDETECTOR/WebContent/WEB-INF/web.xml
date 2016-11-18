@@ -18,6 +18,11 @@
     	</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>Init</servlet-name>
+		<servlet-class>com.milestone1.Dao.StormDetectorInit</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
 	
 	
 	
