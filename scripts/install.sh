@@ -14,7 +14,7 @@ do
 		sudo docker ps -a | grep "stormdetector$current_instance" | awk '{print $1}' | xargs --no-run-if-empty sudo docker stop
 		sudo docker ps -a | grep "stormdetector$current_instance" | awk '{print $1}' | xargs --no-run-if-empty sudo docker rm
 	fi
-	sudo docker run -d -p "$port:$port" --name "stormdetector$current_instance" $(sudo docker images | grep kedargn/stormdetector | awk '{print $3}')
+	sudo docker run -d -p "$port:8080" --name "stormdetector$current_instance" $(sudo docker images | grep kedargn/stormdetector | awk '{print $3}')
 	echo "stormdetector$current_instance instance"
 	current_instance=$((current_instance+1))
 	port=$((port+1))
