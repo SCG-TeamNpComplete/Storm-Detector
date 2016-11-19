@@ -100,7 +100,7 @@ public class StromDetection {
 
 	public String sendURL(String url) throws URISyntaxException {
 		
-		
+		System.out.println("In send url method of Storm Detector");
 		URIBuilder builder = new URIBuilder();
 		builder.setScheme("http").setHost("localhost:8080")
 				.setPath("/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClusteringManager/delegate");

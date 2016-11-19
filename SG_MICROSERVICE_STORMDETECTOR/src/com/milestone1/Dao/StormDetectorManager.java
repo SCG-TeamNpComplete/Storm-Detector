@@ -34,12 +34,13 @@ public class StormDetectorManager {
 	@Path("/delegate")
 	@Produces("text/plain")
 	public String delegate() {
+		
 		StromDetection sd=new StromDetection();
 		
 		/*CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient("localhost:2181", new RetryNTimes(5, 1000));
 		curatorFramework.start();*/
 		
-		CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient("149.160.232.34:2181", new RetryNTimes(5, 1000));
+		CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient("localhost:2181", new RetryNTimes(5, 1000));
 		curatorFramework.start();
 
 		ServiceDiscovery<Void> serviceDiscovery = ServiceDiscoveryBuilder.builder(Void.class).basePath("load-balancing-example").client(curatorFramework).build();

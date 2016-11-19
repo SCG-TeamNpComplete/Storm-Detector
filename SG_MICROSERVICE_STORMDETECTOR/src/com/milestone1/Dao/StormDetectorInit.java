@@ -3,6 +3,10 @@ package com.milestone1.Dao;
 
 import javax.servlet.http.HttpServlet;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.ws.rs.GET;
@@ -18,12 +22,28 @@ import org.apache.curator.x.discovery.UriSpec;
 
 @Path("/StormDetection")
 public class StormDetectorInit extends HttpServlet {
-
+	
 	@Override
 	public void init() throws ServletException {
-
+		
+		String ip = null;
+    	try
+    	{
+	    	URL whatismyip = new URL("http://checkip.amazonaws.com");
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+							whatismyip.openStream()));
+	
+			ip = in.readLine(); //you get the IP as a String
+			System.out.println(ip);
+    	}
+    	catch (Exception exception)
+    	{
+    		exception.printStackTrace();
+    	}
+		
+		
 		// ZookeeperServiceRegistry registry=new ZookeeperServiceRegistry();
-		String endpointURI = "http://localhost:8080/SG_MICROSERVICE_STORMDETECTOR/gateway/StormDetection/get";
+		String endpointURI = "http://"+ip+":8080/SG_MICROSERVICE_STORMDETECTOR/gateway/StormDetection/get";
 		// private final String endpointURI = "http://" + serverName + ":" +
 		// serverPort + "/catalog/resources/catalog";
 		// private final String endpointURI = "http://" +
