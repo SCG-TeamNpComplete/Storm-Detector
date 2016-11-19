@@ -102,8 +102,8 @@ public class StromDetection {
 		
 		System.out.println("In send url method of Storm Detector");
 		URIBuilder builder = new URIBuilder();
-		builder.setScheme("http").setHost("localhost:8080")
-				.setPath("/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClusteringManager/delegate");
+		builder.setScheme("http").setHost("ec2-35-160-137-157.us-west-2.compute.amazonaws.com:11000")
+				.setPath("/servicegateway/stormcluster");
 		URI uri = builder.build();
 		HttpGet httpget = new HttpGet(uri);
 		ClientConfig clientConfig = new ClientConfig();
