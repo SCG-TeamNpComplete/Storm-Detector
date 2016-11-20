@@ -96,8 +96,15 @@ public class StromDetection {
 		
 		
 		URIBuilder builder = new URIBuilder();
+<<<<<<< Updated upstream
 		builder.setScheme("http").setHost("localhost:8080")
 				.setPath("/SG_MICROSERVICE_STROMCLUSTERING/gateway/StormClusteringManager/delegate");
+=======
+		/*builder.setScheme("http").setHost("ec2-35-160-137-157.us-west-2.compute.amazonaws.com:11000")
+				.setPath("/SG_MICROSERVICE_SERVICEGATEWAY/gateway/servicegateway/stormcluster");*/
+		builder.setScheme("http").setHost("localhost:8080")
+		.setPath("/SG_MICROSERVICE_SERVICEGATEWAY/gateway/servicegateway/stormcluster");
+>>>>>>> Stashed changes
 		URI uri = builder.build();
 		HttpGet httpget = new HttpGet(uri);
 		ClientConfig clientConfig = new ClientConfig();
