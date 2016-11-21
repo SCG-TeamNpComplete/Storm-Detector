@@ -39,6 +39,7 @@ public class StormDetectorInit extends HttpServlet {
     	{
     		exception.printStackTrace();
     	}
+    	System.out.println("Registering data detector");
 		// ZookeeperServiceRegistry registry=new ZookeeperServiceRegistry();
 		String endpointURI = "http://"+ip+":8080/SG_MICROSERVICE_STORMDETECTOR/gateway/StormDetection/get";
 		// private final String endpointURI = "http://" + serverName + ":" +
@@ -68,6 +69,7 @@ public class StormDetectorInit extends HttpServlet {
 					.address("localhost").port(port).name(serviceName).build();
 			ServiceDiscoveryBuilder.builder(Void.class).basePath("load-balancing-example").client(curatorFramework)
 					.thisInstance(serviceInstance).build().start();
+			System.out.println("Registered data detector");
 			// return "SD register done";
 
 		} catch (Exception e) {
