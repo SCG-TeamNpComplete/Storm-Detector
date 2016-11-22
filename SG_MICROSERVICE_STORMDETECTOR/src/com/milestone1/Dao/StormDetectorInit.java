@@ -41,7 +41,7 @@ public class StormDetectorInit extends HttpServlet {
     	}
     	System.out.println("*******************Registering data detector*********************");
 		// ZookeeperServiceRegistry registry=new ZookeeperServiceRegistry();
-		String endpointURI = "http://"+ip+":8080/SG_MICROSERVICE_STORMDETECTOR/gateway/StormDetection/get";
+		String endpointURI = "http://"+ip+":9999/SG_MICROSERVICE_STORMDETECTOR/gateway/StormDetection/get";
 		// private final String endpointURI = "http://" + serverName + ":" +
 		// serverPort + "/catalog/resources/catalog";
 		// private final String endpointURI = "http://" +
