@@ -13,10 +13,10 @@ services:
 
 install:
   - cd "SG_MICROSERVICE_STORMDETECTOR" && mvn -e clean install
-  - docker build -t kedargn/stormdetectortest ../.
+  - docker build -t kedargn/stormdetector ../.
   - docker ps -a
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push kedargn/stormdetectortest
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push kedargn/stormdetector
 
 script: mvn clean install -DskipTests=true
 
