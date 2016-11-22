@@ -33,13 +33,13 @@ public class StormDetectorInit extends HttpServlet {
 							whatismyip.openStream()));
 	
 			ip = in.readLine(); //you get the IP as a String
-			System.out.println(ip);
+			System.out.println("ip for detector instance is-"+ip);
     	}
     	catch (Exception exception)
     	{
     		exception.printStackTrace();
     	}
-    	System.out.println("Registering data detector");
+    	System.out.println("*******************Registering data detector*********************");
 		// ZookeeperServiceRegistry registry=new ZookeeperServiceRegistry();
 		String endpointURI = "http://"+ip+":8080/SG_MICROSERVICE_STORMDETECTOR/gateway/StormDetection/get";
 		// private final String endpointURI = "http://" + serverName + ":" +
